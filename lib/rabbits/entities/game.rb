@@ -1,5 +1,5 @@
 module Rabbits
-  class Game < Entity
+  class Game
     attr_accessor :id, :players, :turn
     def initialize
       @players = []
