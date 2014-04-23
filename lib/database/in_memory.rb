@@ -22,7 +22,6 @@ module Rabbits
         return player
       end
 
-
       def get_player(player_id)
         player = @players[player_id]
         return player
@@ -44,6 +43,11 @@ module Rabbits
         return cup
       end
 
+      def create_game(players)
+        game = Game.new(players)
+        game_id = game_id_counter += 1
+        @games[game_id] = game
+      end
     end
   end
 end
