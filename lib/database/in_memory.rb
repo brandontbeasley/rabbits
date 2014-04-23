@@ -22,9 +22,26 @@ module Rabbits
         return player
       end
 
+
       def get_player(player_id)
         player = @players[player_id]
         return player
+      end
+
+      def create_turn(player_id, game_id)
+        turn = Turn.new(player_id: player_id, game_id: game_id)
+        turn.id = @turn_id_counter += 1
+        @turns[turn.id] = turn
+      end
+
+      def get_turn(turn_id)
+        turn = @turns[turn_id]
+        return turn
+      end
+
+      def create_cup
+        cup = Cup.new
+        return cup
       end
 
     end

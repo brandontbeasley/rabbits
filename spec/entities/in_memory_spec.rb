@@ -10,35 +10,46 @@ describe Rabbits::Database::InMemory do
     expect(Rabbits.db.players).to eq ({})
   end
 
-  xit 'can create a game' do
-      player_count = 2
-      game = Rabbits.db.create_game(player_count)
-      expect(game.players.length).to eq 2
-      expect(game.players.name).to eq 'bobby brownfoot'
-    end
-  xit 'can create a turn' do
-      turn = Rabbits.db.create_turn(player_id: 1, game_id: 2)
-      expect(Rabbits.db.turns.first[player_id]).to eq 1
-      expect(Rabbits.db.turns.first[game_id]).to eq 2
-    end
   it 'can create a player' do
       player = Rabbits.db.create_player("Longnose Larry")
       retrieved_player = Rabbits.db.get_player(player.id)
       expect(retrieved_player.name).to eq "Longnose Larry"
     end
-  xit 'can create a cup' do
-      expect(cup.die.length).to eq 13
-    end
-  it 'can update a players score'
-
-  it 'can get a game'
-  it 'can get a turn'
 
   it 'can get a player' do
     player = Rabbits.db.create_player("Bulky Bertha")
     retrieved_player = Rabbits.db.get_player(player.id)
     expect(retrieved_player.name).to eq("Bulky Bertha")
   end
+  it 'can create a turn' do
+      turn = Rabbits.db.create_turn(1, 2)
+      retrieved_turn = Rabbits.db.get_turn(turn.id)
+      expect(retrieved_turn.player_id).to eq 1
+      expect(retrieved_turn.game_id).to eq 2
+      expect(retrieved_turn.cup.die.count).to eq(13)
+  end
+
+  it 'can get a turn' do
+    turn = Rabbits.db.create_turn(1, 2)
+    retrieved_turn = Rabbits.db.get_turn(turn.id)
+    expect(retrieved_turn.player_id).to eq 1
+    expect(retrieved_turn.game_id).to eq 2
+  end
+
+  xit 'can create a game' do
+      player_count = 2
+      game = Rabbits.db.create_game(player_count)
+      expect(game.players.length).to eq 2
+      expect(game.players.name).to eq 'bobby brownfoot'
+    end
+  it 'can create a cup' do
+      cup = Rabbits.db.create_cup
+      expect(cup.die.length).to eq 13
+    end
+  it 'can update a players score'
+
+  it 'can get a game'
+
   it 'can get a cup'
 
   it 'can get turn history'
