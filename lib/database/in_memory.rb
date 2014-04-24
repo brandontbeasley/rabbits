@@ -45,8 +45,8 @@ module Rabbits
 
       def create_game(players)
         game = Game.new(players)
-        game_id = game_id_counter += 1
-        @games[game_id] = game
+        game.id = @game_id_counter += 1
+        @games[game.id] = game
       end
     end
   end
