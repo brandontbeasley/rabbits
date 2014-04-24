@@ -14,6 +14,22 @@ module Rabbits
         @cup_id_counter = 800
       end
 
+
+      def get_player(player_id)
+        player = @players[player_id]
+        return player
+      end
+
+      def get_turn(turn_id)
+        turn = @turns[turn_id]
+        return turn
+      end
+
+      def get_game(game_id)
+        game = @games[game_id]
+        return game
+      end
+
       def create_player(name)
         player = Player.new(name: name)
 
@@ -21,21 +37,11 @@ module Rabbits
         @players[player.id] = player
         return player
       end
-
-      def get_player(player_id)
-        player = @players[player_id]
-        return player
-      end
-
+      
       def create_turn(player_id, game_id)
         turn = Turn.new(player_id: player_id, game_id: game_id)
         turn.id = @turn_id_counter += 1
         @turns[turn.id] = turn
-      end
-
-      def get_turn(turn_id)
-        turn = @turns[turn_id]
-        return turn
       end
 
       def create_cup

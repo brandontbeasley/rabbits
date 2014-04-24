@@ -1,19 +1,27 @@
 describe Rabbits::PlayMove do
 
-	let (:game) { Rabbits::StartGame.run(:players => ["john", "paul", "george"])} 
-	
+	let (:game) { Rabbits::StartGame.run(:players => ["john", "paul", "george"]).game} 
+	before do
+		Rabbits::PlayMove.any_instance.stub(:roll).and_return(%w{meat meat meat})
+	end
 	it 'exists' do
 		expect(Rabbits::PlayMove).to be_a Class
 	end
 
+
 	it "takes three random die from the dice cup" do
-		dice_cup = Rabits.db.get_game(game.id).turn.last.cup
+		current_game = Rabbits.db.get_game(game.id)
+		dice_cup = game.turns.last.cup
+		expect(dice_cup.die.count).to eq 13
+		subject.run(game: current_game)
+		expect(dice_cup.die.count).to eq 10
 	end
 
-	it "takes the open game" do
-		game_id = game.id
-		result = Rabbits::PlayMove.run(game_id)
-		expect(result.success?).to eq true
+	xit "takes the open game" do
+		game_id = game.id + 420420
+		result = Rabbits::PlayMove.run(game: game)
+		expect(result.error?).to eq false
+		# expect(result.error).to eq :invalid_game_id
 	end
 
 end
