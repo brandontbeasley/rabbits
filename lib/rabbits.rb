@@ -7,6 +7,7 @@ require_relative 'database/in_memory.rb'
 
 require_relative 'rabbits/use_case.rb'
 require_relative 'rabbits/use_cases/start_game.rb'
+require_relative 'rabbits/use_cases/play_move.rb'
 
 module Rabbits
   def self.db

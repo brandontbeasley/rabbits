@@ -1,9 +1,9 @@
 module Rabbits
   class Game
-    attr_accessor :id, :players, :turn
+    attr_accessor :id, :players, :turns
     def initialize(players)
       @players = players
-      @turn = []
+      @turns = []
     end
   end
 end
