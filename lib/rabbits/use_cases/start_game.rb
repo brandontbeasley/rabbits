@@ -3,7 +3,7 @@ module Rabbits
     def run(inputs)
       players = inputs[:players]
       return failure(:no_players) if players.count == 0
-      
+
       p_array = players.map do |player|
         Rabbits.db.create_player(player)
       end

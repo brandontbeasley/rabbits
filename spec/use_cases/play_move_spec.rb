@@ -1,6 +1,6 @@
 describe Rabbits::PlayMove do
 
-	let (:game) { Rabbits::StartGame.run(:players => ["john", "paul", "george"]).game} 
+	let (:game) { Rabbits::StartGame.run(:players => ["john", "paul", "george"]).game}
 	before do
 		Rabbits::PlayMove.any_instance.stub(:roll).and_return(%w{meat meat meat})
 	end
@@ -17,11 +17,13 @@ describe Rabbits::PlayMove do
 		expect(dice_cup.die.count).to eq 10
 	end
 
-	xit "takes the open game" do
-		game_id = game.id + 420420
-		result = Rabbits::PlayMove.run(game: game)
-		expect(result.error?).to eq false
-		# expect(result.error).to eq :invalid_game_id
+	it "has roll_face method that returns the outcome" do
+		die = ['red', 'yellow', 'green']
+		result = described_class.roll_face(die)
+		expect(result.count).to eq 3
+		expect(result[0]).to match (/^meat|paw|shot$/)
 	end
+
+	it
 
 end
